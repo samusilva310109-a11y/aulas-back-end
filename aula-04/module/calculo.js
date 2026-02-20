@@ -20,21 +20,38 @@ const calcular = function(numero1, numero2, operador){
     let resultado = false
 
     //Processamento
-    if(operadorMatematico == 'SOMAR'){
-        resultado = valor1 + valor2
-    }else if(operadorMatematico == 'SUBTRAIR'){
-        resultado = valor1 - valor2
-    }else if(operadorMatematico == 'DIVIDIR'){
-        if(valor2 != 0)
+    // if(operadorMatematico == 'SOMAR'){
+    //     resultado = valor1 + valor2
+    // }else if(operadorMatematico == 'SUBTRAIR'){
+    //     resultado = valor1 - valor2
+    // }else if(operadorMatematico == 'DIVIDIR'){
+    //     if(valor2 != 0)
+    //         resultado = valor1 / valor2
+    // }else if(operadorMatematico == "MULTIPLICAR"){
+    //     resultado = valor1 * valor2
+    // }
+
+    switch (operadorMatematico) {
+        case 'SOMAR':
+            resultado = valor1 + valor2
+            break;
+
+        case 'SUBTRAIR':
+            resultado = valor1 - valor2
+            break;
+
+        case 'MULTIPLICAR':
+            resultado = valor1 * valor2
+            break;
+        case 'DIVIDIR':
             resultado = valor1 / valor2
-    }else if(operadorMatematico == "MULTIPLICAR"){
-        resultado = valor1 * valor2
+            break;
     }
     
     //Saída
     return resultado
 }
 
-let result = calcular(2,2,'dividir')
+let result = calcular(2,7,'subtrair')
 
 console.log(result)
