@@ -1,5 +1,5 @@
 /**********************************************************************************
- * Objetivo: Arquivo responsável pelo processamento de cálculos matemáticos (Somar,
+ * Objetivo: Arquivo responsável pelo processamento de cálculos matemáticos (resultador,
  * Subtrair, Multiplicar, Dividir)
  * 
  * Data: 20/02/2026
@@ -33,18 +33,18 @@ const calcular = function(numero1, numero2, operador){
 
     switch (operadorMatematico) {
         case 'SOMAR':
-            resultado = valor1 + valor2
+            resultado = somar(valor1, valor2)
             break;
 
         case 'SUBTRAIR':
-            resultado = valor1 - valor2
+            resultado = subtrair(valor1, valor2)
             break;
 
         case 'MULTIPLICAR':
-            resultado = valor1 * valor2
+            resultado = multiplicar(valor1, valor2)
             break;
         case 'DIVIDIR':
-            resultado = valor1 / valor2
+            resultado = dividir(valor1, valor2)
             break;
     }
     
@@ -52,6 +52,19 @@ const calcular = function(numero1, numero2, operador){
     return resultado
 }
 
-let result = calcular(2,7,'subtrair')
+//função em formato de seta (arrow function)
+const somar = (valor1, valor2) => Number(valor1) + Number(valor2) //<- formato válido apenas para funções de uma linha, caso seja necessário mais de uma linha, é necessário abrir chaves e usar o return para retornar o resultado da função exemplo: const somar = (valor1, valor2) => {conteúdo da função; return resultado}
 
-console.log(result)
+const subtrair = (valor1, valor2) => Number(valor1) - Number(valor2)
+const multiplicar = (valor1, valor2) => Number(valor1) * Number(valor2)
+const dividir = (valor1, valor2) => {
+    if(valor2 != 0)
+        return Number(valor1) / Number(valor2)
+    else
+        return false
+}
+
+module.exports ={
+    calcular,
+    multiplicar
+}
