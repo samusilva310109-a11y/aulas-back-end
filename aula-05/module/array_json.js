@@ -238,7 +238,7 @@ const cadastroDeProdutos = function(){
         }
     ]
 
-    console.table(produtos)
+    // console.table(produtos)
 
     //imprimindo o ARRAY produtos
     // console.log(produtos)
@@ -246,10 +246,21 @@ const cadastroDeProdutos = function(){
     //imprimindo o valor de uma das cores do produto
     // console.log(produtos[0].cor[1].cor);
 
-    //exibindo todas as cores referente ao produto "MONITOR"
-    produtos[1].cor.forEach(i =>{
-        console.log(i.cor);
+    //exibindo todas os produtos e seus valores dos atributos formatado
+    produtos.forEach(i =>{
+
+        console.log("------------------");
+        console.log(`Produto: ${i.nome}`);
+        console.log(`Quantidade: ${i.qtde}`);
+        console.log(`Valor: ${i.valor}`);
+        console.log(`Marca: ${i.marca}`);
+        console.log("Cor: ")
+        i.cor.forEach(tipoCor => {
+            console.log(`${tipoCor.cor}`);
+        })
+        
     })
+
     
 
     //imprime o valor de um JSON específico no ARRAY
