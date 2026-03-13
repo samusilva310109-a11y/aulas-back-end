@@ -254,7 +254,7 @@ const cadastroDeProdutos = function(){
         console.log(`Quantidade: ${i.qtde}`);
         console.log(`Valor: ${i.valor}`);
         console.log(`Marca: ${i.marca}`);
-        console.log("Cor: ")
+        console.log("Cor: ") // extrai as cores dos produtos
         i.cor.forEach(tipoCor => {
             console.log(`${tipoCor.cor}`);
         })
