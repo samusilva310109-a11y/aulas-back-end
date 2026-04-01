@@ -43,9 +43,9 @@ const listaDeFornecedores = []
 const exibirdodos = () => {
     // exibe o objeto array com o seu conteúdo
     console.log(listaDeAlunos)
-    
+
     // exibindo o tipo de dodo de um indíce
-    console.log(typeof(listaDeAlunos[1]))
+    console.log(typeof (listaDeAlunos[1]))
 
     // exibe o objeto array em tabela apresentando indice e conteúdo
     console.table(listaDeAlunos)
@@ -54,14 +54,14 @@ const exibirdodos = () => {
 
     //Usando o FOR
     console.log('\nUSANDO O FOR')
-    for(let cont = 0; cont < listaDeAlunos.length; cont++){
+    for (let cont = 0; cont < listaDeAlunos.length; cont++) {
         console.log(`o nome do aluno é : ${listaDeAlunos[cont]}`)
     }
 
     //Usando o while
     let i = 0
     console.log('\nUSANDO O WHILE')
-    while(i < listaDeAlunos.length){
+    while (i < listaDeAlunos.length) {
         console.log(`o nome do aluno é : ${listaDeAlunos[i]}`)
         i++
     }
@@ -80,14 +80,14 @@ const exibirdodos = () => {
     for (let aluno of listaDeAlunos) {
         console.log(`o nome do aluno é : ${aluno}`)
     }
-    
+
     //Usando o FOR IN
     console.log('\nUSANDO O FOR IN')
     for (let aluno in listaDeAlunos) {
         console.log(`o nome do aluno é : ${listaDeAlunos[aluno]}`)
     }
 
-    
+
     //Os laços de repetição não pode ser aplicados a um objeto JSON, pois não possuem indíces (JSON)
 }
 
@@ -116,15 +116,15 @@ const manipularDados = () => {
     //O unshift() adiciona um novo conteúdo a uma ARRAY no começo e reorganiza todos os outros itens
     listaDeFornecedores.unshift('Luciano')
     console.table(listaDeFornecedores)
-    
+
     //Permite adicionar um novo elemento a uma determinada posição do ARRAY
-                        //(indice, qtdeElementosASerRemovido, 'Novo conteúdo')
-    listaDeFornecedores.splice(3,0,'Bernado')
+    //(indice, qtdeElementosASerRemovido, 'Novo conteúdo')
+    listaDeFornecedores.splice(3, 0, 'Bernado')
     console.table(listaDeFornecedores)
 
     //Permite remover um determinado conteúdo com base no indíce do elemento do ARRAY
-                        //(indice, qtdeElementosASerRemovido)
-    listaDeFornecedores.splice(6,2)
+    //(indice, qtdeElementosASerRemovido)
+    listaDeFornecedores.splice(6, 2)
     console.table(listaDeFornecedores)
 
     //Remove o último elemento do ARRAY
@@ -136,11 +136,11 @@ const manipularDados = () => {
     listaDeFornecedores.shift()
     console.table(listaDeFornecedores)
 
-    
+
 
 }
 
-const removerElemento = function(nome){
+const removerElemento = function (nome) {
 
     //indexOf()-> Retorna o indice referente ao conteúdo que está sendo pesquisado
     listaDeAlunos.splice(listaDeAlunos.indexOf(nome), 1)
@@ -159,22 +159,22 @@ const removerElemento = function(nome){
     // }
 }
 
-const verificarItem = function(item){
+const verificarItem = function (item) {
 
     //includes verifica se o conteúdo existe dentro do ARRAY e retorna (true/false)
     return listaDeAlunos.includes(item)
 }
 
-const manipularDadosJSON = function(){
+const manipularDadosJSON = function () {
     // criando um objeto JSON
-        // a estrutura do JSON é Chave(atributo) : valor (conteúdo)
-    let aluno = {"id":1,"nome":"José da silva","ra":10011,"email":"jose.silva@gmail.com"}
-    
+    // a estrutura do JSON é Chave(atributo) : valor (conteúdo)
+    let aluno = { "id": 1, "nome": "José da silva", "ra": 10011, "email": "jose.silva@gmail.com" }
+
     //exibe o objeto JSON
     console.log(aluno);
     console.table(aluno)
     console.log(aluno.email);
-    
+
     //adiciona um novo atributo no JSON já existente
     aluno.telefone = "(11)99782-3421"
     aluno.data_nascimento = new Date("2009-01-31T12:02:25.200")
@@ -188,50 +188,53 @@ const manipularDadosJSON = function(){
     console.log(aluno);
 }
 
-const cadastroDeProdutos = function(){
+const cadastroDeProdutos = function () {
     let cores = [
-        {"id":1, "cor": "Branco", "hexa": "#ffffff"},//0
-        {"id":2, "cor": "Preto", "hexa": "#000000"},//1
-        {"id":3, "cor":"Azul", "hexa": "#0000ff"},//2
-        {"id":4, "cor": "Amarelo", "hexa":"#ffff00"},//3
-        {"id":5, "cor": "Rosa", "hexa": "#ffb5c0"}//4
+        { "id": 1, "cor": "Branco", "hexa": "#ffffff" },//0
+        { "id": 2, "cor": "Preto", "hexa": "#000000" },//1
+        { "id": 3, "cor": "Azul", "hexa": "#0000ff" },//2
+        { "id": 4, "cor": "Amarelo", "hexa": "#ffff00" },//3
+        { "id": 5, "cor": "Rosa", "hexa": "#ffb5c0" }//4
     ]
-    
+
     let marcas = [
-        {"id": 1, "marca": "Dell", "telefone": "011-99234-6543", "email":"dell.tecnology@gmail.com"},
-        {"id": 2, "marca": "Lenovo", "telefone": "011-99658-4553", "email":"lenovo@gmail.com"},
-        {"id": 3, "marca": "Asus", "telefone": "012-92589-2001", "email":"asus.tec@gmail.com"},
-        {"id": 4, "marca": "Positivo", "telefone": "021-92598-1025", "email":"positivo@gmail.com"},
+        { "id": 1, "marca": "Dell", "telefone": "011-99234-6543", "email": "dell.tecnology@gmail.com" },
+        { "id": 2, "marca": "Lenovo", "telefone": "011-99658-4553", "email": "lenovo@gmail.com" },
+        { "id": 3, "marca": "Asus", "telefone": "012-92589-2001", "email": "asus.tec@gmail.com" },
+        { "id": 4, "marca": "Positivo", "telefone": "021-92598-1025", "email": "positivo@gmail.com" },
     ]
 
     let produtos = [
-        {"id":1, "nome":"Monitor", 
-         "descricao":"Monitor de 27 polegadas",
-         "valor":1500,
-         "qtde":20,
-         "cor":[
-            cores[0], 
-            cores[1]
-        ],
-         "marca":[marcas[0].marca]
+        {
+            "id": 1, "nome": "Monitor",
+            "descricao": "Monitor de 27 polegadas",
+            "valor": 1500,
+            "qtde": 20,
+            "cor": [
+                cores[0],
+                cores[1]
+            ],
+            "marca": [marcas[0].marca]
         },
-        {"id":2, "nome":"Teclado", 
-            "descricao":"Teclado mecânico RGB",
-            "valor":250,
-            "qtde":500,
-            "cor":cores,
-            "marca":[marcas[0].marca]
+        {
+            "id": 2, "nome": "Teclado",
+            "descricao": "Teclado mecânico RGB",
+            "valor": 250,
+            "qtde": 500,
+            "cor": cores,
+            "marca": [marcas[0].marca]
         },
-        {"id":3, "nome":"Mouse", 
-            "descricao":"Mouse de clique sensível",
-            "valor":250,
-            "qtde":650,
-            "cor":[
+        {
+            "id": 3, "nome": "Mouse",
+            "descricao": "Mouse de clique sensível",
+            "valor": 250,
+            "qtde": 650,
+            "cor": [
                 cores[1],
-                cores[4], 
+                cores[4],
                 cores[0]
             ],
-            "marca":[
+            "marca": [
                 marcas[0].marca,
                 marcas[2].marca
             ]
@@ -247,25 +250,52 @@ const cadastroDeProdutos = function(){
     // console.log(produtos[0].cor[1].cor);
 
     //exibindo todas os produtos e seus valores dos atributos formatado
-    produtos.forEach(i =>{
+    produtos.forEach(i => { // Permite extrair os produtos
 
         console.log("------------------");
         console.log(`Produto: ${i.nome}`);
         console.log(`Quantidade: ${i.qtde}`);
         console.log(`Valor: ${i.valor}`);
-        console.log(`Marca: ${i.marca}`);
-        console.log("Cor: ") // extrai as cores dos produtos
-        i.cor.forEach(tipoCor => {
-            console.log(`${tipoCor.cor}`);
+        console.log(`Marca:`);
+
+        i.marca.forEach(marcas => { //Permite extrair as marcas de cada produto
+            console.log(`   ${marcas}`);
         })
-        
+        console.log("Cor: ") // extrai as cores dentro de cada produto
+        i.cor.forEach(tipoCor => {
+            console.log(`   ${tipoCor.cor} | ${tipoCor.hexa}`);
+        })
+
     })
 
-    
+
+    //Filtrando produtos pelo nome
+    console.log("Exemplo de como pesquisar um produto pelo nome");
+
+    let nomeProduto = 'monitor'
+    produtos.forEach(itemProduto => {
+        if (String(nomeProduto).toUpperCase() === String(itemProduto.nome).toUpperCase()) {
+            console.log(itemProduto);
+
+        }
+    })
+
+    //Filtrando produtos pela cor
+    console.log("Exemplo de como pesquisar um produto pela cor");
+
+    let corProduto = 'rosa'
+    produtos.forEach(itemProduto => {
+        itemProduto.cor.forEach(cores => {
+            if (String(corProduto).toUpperCase() === String(cores.cor).toUpperCase()) {
+                console.log(itemProduto);
+
+            }
+        })
+    })
 
     //imprime o valor de um JSON específico no ARRAY
     // console.log(cores[2].cor);
-    
+
     // //percorre o ARRAY e imprime um valor de todos os JSON da ARRAY
     // marcas.forEach(i =>{
     //     console.log(i.telefone)
