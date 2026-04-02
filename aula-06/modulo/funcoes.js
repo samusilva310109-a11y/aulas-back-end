@@ -135,7 +135,6 @@ const getCidades = (siglaUf) => {
         return listaCidades
 }
 
-console.log(getEstadosRegiao("sudeste"));
  
 
 module.exports = {

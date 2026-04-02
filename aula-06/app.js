@@ -47,80 +47,126 @@ const estadosCidades = require("./modulo/funcoes.js")
 //Endpoint para listar os estados
 app.get("/v1/senai/estados",(request, response) => {
     let estados = estadosCidades.getListaEstados()
-    response.json(estados)
-    response.status(200) //Requisição bme-sucedida
+    
+
+    if(estados){
+        response.status(200) //Requisição bem-sucedida
+        response.json(estados)
+    }else{
+        response.status(500)
+        response.json({"message":"Não foi possível encontrar a lista de estados"})
+    }
+
 })
 
+//Retorna os dados de um estado filtrando pela sigla do estado
 app.get('/v1/senai/dados/estado/:uf', (request, response) => {
     let sigla = request.params.uf
     let estado = estadosCidades.getDadosEstados(sigla)
     if (estado) {
+        response.status(200) 
         response.json(estado)
-        response.status(200)  
     }else{
-        response.json({"message":"Nenhum estado encontrado"})
         response.status(404)
+        response.json({"message":"Nenhum estado encontrado"})
     }
     
     
 })
 
+//Retorna a capital de estados filtrando pela sigla do estado
 app.get("/v1/senai/capital/estado/:uf", (request, response) => {
     let sigla = request.params.uf
     let capitalEstado = estadosCidades.getCapitalEstado(sigla)
 
     if(capitalEstado){
-        response.json(capitalEstado)
         response.status(200)  
+        response.json(capitalEstado)
     }else{
-        response.json({"message":"Nenhum estado encontrado"})
         response.status(404)
+        response.json({"message":"Nenhum estado encontrado"})
     }
     
     
 })
 
+//Retorna uma lista de estados filtrando pela região
 app.get("/v1/senai/estados/regiao/:regiao", (request, response) => {
     let nomeRegiao= request.params.regiao
     let regiao = estadosCidades.getEstadosRegiao(nomeRegiao)
 
     if(regiao){
-        response.json(regiao)
-        response.status(200)  
+        response.status(200) 
+        response.json(regiao) 
     }else{
-        response.json({"message":"Nenhuma região encontrada"})
         response.status(404)
+        response.json({"message":"Nenhuma região encontrada"})
     }
     
     
 })
 
-app.get("/v1/senai/capital/pais", (request, response) => {
+//Retorna dados das antigas caapitais e atual capital do Brasil
+app.get("/v1/senai/estado/capital/pais/brasil", (request, response) => {
     let capitais = estadosCidades.getCapitalPais()
 
     if(capitais){
-        response.json(capitais)
         response.status(200)  
+        response.json(capitais)
     }else{
-        response.json({"message":"Não foi possível encontrar as capitais do país"})
         response.status(500)
+        response.json({"message":"Não foi possível encontrar as capitais do país"})
     }
     
     
 })
 
-app.get("/cidades", (request, response) => {
+//Retorna as cidades de um estado filtrando pela sigla do estado
+app.get("/v1/senai/cidades/estado", (request, response) => {
+    
     const {estado} = request.query
     const cidade = estadosCidades.getCidades(estado)
 
     if (cidade) {
-        response.send(cidade)
         response.status(200)
+        response.send(cidade)
     }else{
-        response.json({"message":"Nenhuma cidade encontrada"})
         response.status(404)
+        response.json({"message":"Nenhuma cidade encontrada"})
     }
     
+})
+
+app.get("/v1/senai/doc", (request, response) => {
+    let docAPI = {
+        "api-description":"API para manipular dados de Estados e Cidades",
+        "date":"2026/04/02",
+        "development":"Samuel Silva Moreira Dos Santos",
+        "version":1.0,
+        "endpoints":[
+            {"rota1":"/v1/senai/estados",
+             "description":"Retorna a lista de todos os estados"
+            },
+            {"rota2":"/v1/senai/dados/estado/sp",
+                "description":"Retorna dados de um estado filtrando pela sigla"
+            },
+            {"rota3":"/v1/senai/capital/estado/:uf",
+                "description":"Retorna a capital de estados filtrando pela sigla do estado"
+            },
+            {"rota4":"/v1/senai/estados/regiao/:regiao",
+                "description":"Retorna uma lista de estados filtrando pela região"
+            },
+            {"rota5":"/v1/senai/estado/capital/pais/brasil",
+                "description":"Retorna dados das antigas capitais e atual capital do Brasil"
+            },
+            {"rota6":"/v1/senai/cidades/estado",
+                "description":"Retorna as cidades de um estado filtrando pela sigla do estado"
+            }
+        ]
+    }
+
+    response.status(200)
+    response.json(docAPI)
 })
 
 //Fazer o start na API (aguardando as requisições)
