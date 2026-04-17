@@ -6,6 +6,15 @@
  * Versão:1.0
  *******************************************************************/
 
+//Realiza import da biblioteca knex para manipular dados no banco de dados my sql
+const knex = require('knex')
+
+//Realiza import do arquivo de configuração do acesso ao banco dados
+const knexDatabaseConfig = require('../../database_config/knexConfig.js')
+
+//Criar a conexação com o BD MySQL conforme o arquivo de configuração
+const knexConection = knex(knexDatabaseConfig.development)
+
 //Função para inserir um novo filme no banco de dados
 async function insertFilme(filme) {
     let sql = `
@@ -27,6 +36,14 @@ async function insertFilme(filme) {
         '${filme.avaliacao}'
     );
     `
+    //Encaminha ao banco de dados o script sql
+    let result = await knexConection.raw(sql)
+
+    if(result)
+        return true
+    else 
+        return false
+    
 }
 
 //Função para atualizar um filme existente no banco de dados
