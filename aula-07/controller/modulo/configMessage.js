@@ -7,7 +7,7 @@
  *******************************************************************/
 
 //Padronização dos retornos da API
-const DESFAULT_MESSAGE = {
+const DEFAULT_MESSAGE = {
     api_description:"API para controlar projeto de filmes",
     developer:"Samuel Silva Moreira Dos Santos",
     version:"1.0.4.26",
@@ -20,13 +20,25 @@ const DESFAULT_MESSAGE = {
 const ERROR_BAD_REQUEST = {
     staus:false,
     status_code:400,
-    message: "Não possível processar a inconsistências nos dados."
+    message: "Não foi possível processar há inconsistências nos dados."
 }
 
 const INTERNAL_SERVER_ERROR_MODEL = {
     status:false,
     status_code:500,
     message: "Não foi possível processar a requisição devido a um erro interno no servidor [MODEL]"
+}
+
+const INTERNAL_SERVER_ERROR_CONTROLLER = {
+    status:false,
+    status_code:500,
+    message: "Não foi possível processar a requisição devido a um erro interno no servidor [CONTROLLER]"
+}
+
+const ERROR_CONTENT_TYPE = {
+    status:false,
+    status_code:415,
+    message: "Não foi possível processar a requisição, pois o formato de dados encaminhad não é suportado pelo servidor. Apenas deve ser utilizado o formato JSON"
 }
 
 //Mensagens de SUCESSO do projeto de filmes
@@ -37,8 +49,10 @@ const SUCESS_CREATED_ITEM = {
 }
 
 module.exports = {
-    DESFAULT_MESSAGE,
+    DEFAULT_MESSAGE,
     ERROR_BAD_REQUEST,
     SUCESS_CREATED_ITEM,
-    INTERNAL_SERVER_ERROR_MODEL
+    INTERNAL_SERVER_ERROR_MODEL,
+    INTERNAL_SERVER_ERROR_CONTROLLER,
+    ERROR_CONTENT_TYPE
 }

@@ -17,32 +17,40 @@ const knexConection = knex(knexDatabaseConfig.development)
 
 //Função para inserir um novo filme no banco de dados
 async function insertFilme(filme) {
-    let sql = `
-    insert into tbl_filme (
-        nome,
-        sinopse,
-        capa,
-        data_lancamento,
-        duracao,
-        valor,
-        avaliacao
-    ) values (
-        '${filme.nome}',
-        '${filme.sinopse}',
-        '${filme.capa}',
-        '${filme.data_lancamento}',
-        '${filme.duracao}',
-        '${filme.valor}',
-        '${filme.avaliacao}'
-    );
-    `
-    //Encaminha ao banco de dados o script sql
-    let result = await knexConection.raw(sql)
 
-    if(result)
-        return true
-    else 
+    try {
+        let sql = `
+            insert into tbl_filme (
+                nome,
+                sinopse,
+                capa,
+                data_lancamento,
+                duracao,
+                valor,
+                avaliacao
+            ) values (
+                '${filme.nome}',
+                '${filme.sinopse}',
+                '${filme.capa}',
+                '${filme.data_lancamento}',
+                '${filme.duracao}',
+                '${filme.valor}',
+                if('${filme.avaliacao}' = '', null, '${filme.avaliacao}')
+            );
+            `
+        
+        //Encaminha ao banco de dados o script sql
+        let result = await knexConection.raw(sql)
+
+        if(result)
+            return true
+        else 
+            return false
+        
+    } catch (error) {
         return false
+    }
+    
     
 }
 

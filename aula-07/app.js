@@ -5,7 +5,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
-const bodyParserJSON = bodyParser.json
+const bodyParserJSON = bodyParser.json()
 
 //Criando um objeto do express para criar uma API
 const app = express()
@@ -30,7 +30,9 @@ app.post("/v1/senai/locadora/filme", bodyParserJSON, async (request, response) =
     //Recebendo o body da requisição 
     let dados = request.body
 
-    let result = await controllerFilme.inserirNovoFilme(dados)
+    let contentType = request.headers['content-type']
+    
+    let result = await controllerFilme.inserirNovoFilme(dados, contentType)
     
     response.status(result.status_code)
     response.json(result)
