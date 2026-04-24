@@ -20,39 +20,54 @@ const DEFAULT_MESSAGE = {
 const ERROR_BAD_REQUEST = {
     staus:false,
     status_code:400,
-    message: "Não foi possível processar há inconsistências nos dados."
+    message: "Não foi possível processar. Há inconsistências nos dados."
 }
 
-const INTERNAL_SERVER_ERROR_MODEL = {
-    status:false,
-    status_code:500,
-    message: "Não foi possível processar a requisição devido a um erro interno no servidor [MODEL]"
-}
-
-const INTERNAL_SERVER_ERROR_CONTROLLER = {
-    status:false,
-    status_code:500,
-    message: "Não foi possível processar a requisição devido a um erro interno no servidor [CONTROLLER]"
+const ERROR_NOT_FOUND = {
+    staus:false,
+    status_code:404,
+    message: "Não foram encontrados dados para retorno."
 }
 
 const ERROR_CONTENT_TYPE = {
     status:false,
     status_code:415,
-    message: "Não foi possível processar a requisição, pois o formato de dados encaminhad não é suportado pelo servidor. Apenas deve ser utilizado o formato JSON"
+    message: "Não foi possível processar a requisição, pois o formato de dados encaminhad não é suportado pelo servidor. Apenas deve ser utilizado o formato JSON."
 }
 
+const INTERNAL_SERVER_ERROR_MODEL = {
+    status:false,
+    status_code:500,
+    message: "Não foi possível processar a requisição devido a um erro interno no servidor [MODEL]."
+}
+
+const INTERNAL_SERVER_ERROR_CONTROLLER = {
+    status:false,
+    status_code:500,
+    message: "Não foi possível processar a requisição devido a um erro interno no servidor [CONTROLLER]."
+}
+
+
+
 //Mensagens de SUCESSO do projeto de filmes
+const SUCESS_RESPONSE = {
+    status:true,
+    status_code: 200,
+}
+
 const SUCESS_CREATED_ITEM = {
     status:true,
     status_code: 201,
-    message:"Item inserido com sucesso"
+    message:"Item inserido com sucesso."
 }
 
 module.exports = {
     DEFAULT_MESSAGE,
     ERROR_BAD_REQUEST,
-    SUCESS_CREATED_ITEM,
+    ERROR_CONTENT_TYPE,
+    ERROR_NOT_FOUND,
     INTERNAL_SERVER_ERROR_MODEL,
     INTERNAL_SERVER_ERROR_CONTROLLER,
-    ERROR_CONTENT_TYPE
+    SUCESS_RESPONSE,
+    SUCESS_CREATED_ITEM
 }

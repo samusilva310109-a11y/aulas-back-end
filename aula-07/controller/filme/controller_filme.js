@@ -62,11 +62,65 @@ async function atualizarFilme() {
 //Função para retornar todos os filmes existentes
 async function listarFilmes() {
 
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
+
+    try {
+        //Chama a funçap para retirnar a lista de todos os filmes
+        let result = await FilmeDAO.selectAllFilme()
+
+        //Validação para veificar se o DAO conseguiu processar o script no BD
+        if(result){
+            //Validação para verificar se o conteúdo do array tem dados de retorno
+            //Ou se está vazia
+            if (result.length > 0) {
+                customMessage.DEFAULT_MESSAGE.status = customMessage.SUCESS_RESPONSE.status
+                customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCESS_RESPONSE.status_code
+                customMessage.DEFAULT_MESSAGE.response.count = result.length
+                customMessage.DEFAULT_MESSAGE.response.filme = result
+
+                return customMessage.DEFAULT_MESSAGE // 200
+            }else{
+                return customMessage.ERROR_NOT_FOUND // 404
+            }
+        }else{
+            return customMessage.INTERNAL_SERVER_ERROR_MODEL // 500 model
+        }
+            
+    } catch (error) {
+        return customMessage.INTERNAL_SERVER_ERROR_CONTROLLER // 500 controller
+    }
 }
 
 //Função para retornar um filme filtrando pelo ID
-async function buscarFilme() {
+async function buscarFilme(id) {
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
 
+    try {
+        //Validação para garantir que o id seja um número válido
+        if(String(id).replaceAll(" ", "") == '' || id == null || id == undefined || isNaN(id)){
+            customMessage.ERROR_BAD_REQUEST.field = "[ID] INVÁLIDO"
+            return customMessage.ERROR_BAD_REQUEST // 400
+        }else{
+            let result = await FilmeDAO.selectByIdFilme(id)
+
+            if(result){
+                //Verifica se houve algum dado retornado do DAO ou um false (erro)
+                if(result.length > 0){
+                    customMessage.DEFAULT_MESSAGE.status = customMessage.SUCESS_RESPONSE.status
+                    customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCESS_RESPONSE.status_code
+                    customMessage.DEFAULT_MESSAGE.response.filme = result
+
+                    return customMessage.DEFAULT_MESSAGE //200 
+                }else{
+                    return customMessage.ERROR_NOT_FOUND //404
+                }
+            }else{
+                return customMessage.INTERNAL_SERVER_ERROR_MODEL
+            }
+        }
+    } catch (error) {
+        return customMessage.INTERNAL_SERVER_ERROR_CONTROLLER // 500 (controller)
+    }
 }
 
 //Função para excluir um filme
