@@ -55,7 +55,47 @@ async function inserirNovoFilme(filme, contentType) {
 }
 
 //Função para atualizar um filme existente
-async function atualizarFilme() {
+async function atualizarFilme(filme, id, contentType) {
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
+
+    try {
+        if(String(contentType).toLowerCase == 'application/json'){
+            
+            let resultBuscarFilme = await buscarFilme(id)
+
+            if(resultBuscarFilme.status){
+
+                let validar = await validarDados(filme)
+
+                if(!validar){
+
+                    filme.id = Number(id)
+
+                    let result = await FilmeDAO.updateFilme(filme)
+
+                    if(result){
+                        customMessage.DEFAULT_MESSAGE.status = customMessage.SUCESS_UPDATE_ITEM.status
+                        customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCESS_UPDATE_ITEM.status_code
+                        customMessage.DEFAULT_MESSAGE.message = customMessage.SUCESS_UPDATE_ITEM.message
+
+                        return customMessage.DEFAULT_MESSAGE // 200 -> criado com sucesso
+                    }else{
+                        return customMessage.INTERNAL_SERVER_ERROR_MODEL // 500 -> erro no model
+                    }
+                }else{
+                    return validar // retorna 400  - campos inválidos
+                }
+            }else{
+                return buscarFilme // retorns 400, 500, 404 caso não encontrado(404), bad request(400) ou erro interno no servidor(500)
+            }
+        }else{
+            return configMessages.ERROR_CONTENT_TYPE // 415 - tipo de conteúdo inválido
+        }
+    } catch (error) {
+        return configMessages.INTERNAL_SERVER_ERROR_CONTROLLER // 500 - erro interno no controller
+    }
+   
+
 
 }
 
@@ -124,8 +164,33 @@ async function buscarFilme(id) {
 }
 
 //Função para excluir um filme
-async function excluirFilme() {
+async function excluirFilme(id) {
 
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
+
+    try {   
+        if(id == undefined || String(id).replaceAll('', ' ') == '' || id == '' || isNaN(id) || id <= 0){
+            customMessage.ERROR_BAD_REQUEST.field = `[ID] INVÁLIDO.`
+            return customMessage.ERROR_BAD_REQUEST // 400
+        }else{
+
+            let result = await FilmeDAO.deleteFilme(id)
+
+            if(result){
+                customMessage.DEFAULT_MESSAGE.status = customMessage.SUCESS_DELETED_ITEM.status
+                customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCESS_DELETED_ITEM.status_code
+                customMessage.DEFAULT_MESSAGE.message = customMessage.SUCESS_DELETED_ITEM.message
+
+                return customMessage.DEFAULT_MESSAGE // 200
+            }else{
+                return customMessage.ERROR_NOT_FOUND //404
+            }
+
+        }   
+    } catch (error) {
+        console.log(error)
+        customMessage.INTERNAL_SERVER_ERROR_CONTROLLER // 500 erro no controlller
+    }
 }
 
 

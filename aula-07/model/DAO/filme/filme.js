@@ -55,8 +55,33 @@ async function insertFilme(filme) {
 }
 
 //Função para atualizar um filme existente no banco de dados
-async function updateFilme(filme) {
+async function updateFilme(filme) {  
+    try {
+        let sql = 
+        `
+            update tbl_filme set 
+                            nome            = '${filme.nome}',
+                            sinopse         = '${filme.sinopse}',
+                            capa            = '${filme.capa}',
+                            data_lancamento = '${filme.data_lancamento}',
+                            duracao         = '${filme.duracao}',
+                            valor           = '${filme.valor}',
+                            avaliacao       = if('${filme.avaliacao}' = '', null, '${filme.avaliacao}') 
+                        where id            = ${filme.id};
+        `
+
+        let result = knexConection(sql)
+
+        if(result)
+            return true
+        else
+            return false
+
+    } catch (error) {
+        return false
+    }
     
+   
 }
 
 //Função para retornar todos os dados de filme do banco de dados
@@ -102,7 +127,18 @@ async function selectByIdFilme(id) {
 
 //Função para excluir um filme em específico filtrando pela chave primária (ID)
 async function deleteFilme(id) {
-    
+    try {
+        let sql = `delete from tbl_filme where id=${id};`
+        let result = knexConection(sql)
+
+        if(result)
+            return true
+        else
+            return false
+
+    } catch (error) {
+        return false
+    }
 }
 
 module.exports = {
