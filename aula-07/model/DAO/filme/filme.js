@@ -17,7 +17,6 @@ const knexConection = knex(knexDatabaseConfig.development)
 
 //Função para inserir um novo filme no banco de dados
 async function insertFilme(filme) {
-
     try {
         let sql = `
             insert into tbl_filme (
@@ -43,34 +42,34 @@ async function insertFilme(filme) {
         let result = await knexConection.raw(sql)
 
         if(result)
-            return true
+            return result[0].insertId //retorna o ID gerado no insert
         else 
             return false
         
     } catch (error) {
         return false
     }
-    
-    
 }
 
 //Função para atualizar um filme existente no banco de dados
 async function updateFilme(filme) {  
     try {
         let sql = 
-        `
-            update tbl_filme set 
-                            nome            = '${filme.nome}',
-                            sinopse         = '${filme.sinopse}',
-                            capa            = '${filme.capa}',
-                            data_lancamento = '${filme.data_lancamento}',
-                            duracao         = '${filme.duracao}',
-                            valor           = '${filme.valor}',
-                            avaliacao       = if('${filme.avaliacao}' = '', null, '${filme.avaliacao}') 
-                        where id            = ${filme.id};
-        `
+        `update tbl_filme set
+                    nome            = '${filme.nome}',
+                    sinopse         = '${filme.sinopse}',
+                    capa            = '${filme.capa}',
+                    data_lancamento = '${filme.data_lancamento}',
+                    duracao         = '${filme.valor}',
+                    valor           = '${filme.valor}',
+                    avaliacao       = if('${filme.avaliacao}' = '', null , '${filme.avaliacao}')
+                    where id        = ${filme.id};`
 
-        let result = knexConection(sql)
+
+        console.log(sql);
+        
+        let result = await knexConection.raw(sql)
+        
 
         if(result)
             return true
@@ -78,6 +77,8 @@ async function updateFilme(filme) {
             return false
 
     } catch (error) {
+        console.log(error);
+        
         return false
     }
     
@@ -129,7 +130,7 @@ async function selectByIdFilme(id) {
 async function deleteFilme(id) {
     try {
         let sql = `delete from tbl_filme where id=${id};`
-        let result = knexConection(sql)
+        let result = await knexConection.raw(sql)
 
         if(result)
             return true

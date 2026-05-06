@@ -52,7 +52,7 @@ const INTERNAL_SERVER_ERROR_CONTROLLER = {
 //Mensagens de SUCESSO do projeto de filmes
 const SUCESS_RESPONSE = {
     status:true,
-    status_code: 200,
+    status_code: 200
 }
 
 const SUCESS_CREATED_ITEM = {
@@ -82,5 +82,6 @@ module.exports = {
     INTERNAL_SERVER_ERROR_CONTROLLER,
     SUCESS_RESPONSE,
     SUCESS_CREATED_ITEM,
-    SUCESS_UPDATE_ITEM
+    SUCESS_UPDATE_ITEM,
+    SUCESS_DELETED_ITEM
 }
